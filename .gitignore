@@ -1,0 +1,7 @@
+plugin/bin/
+plugin/obj/
+evidence/
+runtime/
+capture.stop
+__pycache__/
+*.zip
