@@ -1,5 +1,100 @@
 {
-  "transport": [{"id":"live_frame","mapping":"Local\\BFSForzaLiveFramesV1","width":1280,"height":720,"fps":30,"headerBytes":64,"magic":827805250,"staleMs":750,"pixelFormat":"rgba"}],
-  "presentation": [{"id":"backdrop","layer":31,"cameraDepth":-100,"autoEnable":true,"previewInMenu":false,"hideRootNames":["BUILDING","Japanese countryside template"],"hideRootPrefixes":["Japanese countryside "],"toggleKey":"F8","multiplayerAllowed":false,"changeRoad":false,"changeCar":false}],
-  "hooks": [{"id":"capture","target":"forzahorizon6.exe","method":"Windows.Graphics.Capture via FFmpeg gfxcapture; continuous until Stop-Bridge or game capture closes","writesGame":false},{"id":"gameplay","target":"PathFollower","method":"Instance and CurrentWorldSpeed read only; keep backdrop during song pause","writesGame":false},{"id":"render","target":"Camera and HDAdditionalCameraData","method":"temporary background camera, pinned-pointer texture upload, and restore original clear settings","writesGame":true}]
+  "transport": [
+    {
+      "id": "live_frame",
+      "mapping": "Local\\BFSForzaLiveFramesV1",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "headerBytes": 64,
+      "magic": 827805250,
+      "staleMs": 750,
+      "pixelFormat": "rgba"
+    }
+  ],
+  "presentation": [
+    {
+      "id": "backdrop",
+      "layer": 31,
+      "cameraDepth": -100,
+      "autoEnable": true,
+      "previewInMenu": false,
+      "cleanVideo": true,
+      "preserveComponentNames": [
+        "CubeTriggerEvent",
+        "CubeExplodeEffectCaller",
+        "ProximityPathVehicleMover",
+        "ChildObjectExplosion"
+      ],
+      "preserveRootPrefixes": [
+        "BFS_Ramp_Beat",
+        "board fragture effect",
+        "HitExplode"
+      ],
+      "disabledFrameSettings": [
+        "AtmosphericScattering",
+        "Volumetrics",
+        "VolumetricClouds",
+        "CustomPostProcess",
+        "CustomPass",
+        "Distortion",
+        "MotionVectors",
+        "ObjectMotionVectors",
+        "MotionBlur",
+        "DepthOfField",
+        "ColorGrading",
+        "Vignette",
+        "ChromaticAberration",
+        "LensDistortion",
+        "FilmGrain"
+      ],
+      "hideRootNames": [
+        "BUILDING",
+        "Japanese countryside template"
+      ],
+      "hideRootPrefixes": [
+        "Japanese countryside "
+      ],
+      "toggleKey": "F8",
+      "multiplayerAllowed": false,
+      "changeRoad": false,
+      "changeCar": false,
+      "preserveRootNames": [
+        "CubeExplosionEffectPool",
+        "Beats",
+        "Obstacles",
+        "Stings",
+        "Traffic"
+      ],
+      "preserveRootPatterns": [
+        "_Beat[0-9.]+_Key[0-9]+$"
+      ],
+      "gameplayFrameSettings": [
+        "Postprocess",
+        "ExposureControl",
+        "Tonemapping",
+        "Bloom"
+      ]
+    }
+  ],
+  "hooks": [
+    {
+      "id": "capture",
+      "target": "forzahorizon6.exe",
+      "method": "Windows.Graphics.Capture via FFmpeg gfxcapture; continuous until Stop-Bridge or game capture closes",
+      "writesGame": false
+    },
+    {
+      "id": "gameplay",
+      "target": "PathFollower",
+      "method": "Instance and CurrentWorldSpeed read only; keep backdrop during song pause",
+      "writesGame": false
+    },
+    {
+      "id": "render",
+      "target": "Camera and HDAdditionalCameraData",
+      "method": "temporary background camera, pinned-pointer texture upload, and restore original clear settings",
+      "writesGame": true
+    }
+  ]
 }

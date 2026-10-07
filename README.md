@@ -2,7 +2,7 @@
 
 An experimental Windows bridge that captures the running Forza Horizon 6 window and displays its live video behind Beat For Speed Demo gameplay. Capture runs continuously until you stop it or the source closes. **There is no time limit.**
 
-This is a **flat live-video backdrop prototype**, not a full BFS port into Forza. It does not synchronize Forza's car, camera, physics or road with BFS. A car visible in the feed remains part of that image; BFS's playable car still uses BFS's renderer. Depth-correct scenery integration is not implemented.
+This is a **flat live-video backdrop prototype**, not a full BFS port into Forza. It does not synchronize Forza's car, camera, physics or road with BFS. A car visible in the feed remains part of that image. Clean mode hides BFS's player/world visuals but keeps rhythm targets and hazards; BFS still supplies gameplay and collisions. Depth-correct scenery integration is not implemented.
 
 ## Requirements
 
@@ -16,9 +16,9 @@ This is a **flat live-video backdrop prototype**, not a full BFS port into Forza
 
 1. Close BFS, back up its plugins, and copy `BepInEx/plugins/BFS.ForzaLive.dll` from the release ZIP into the same folder in your BFS installation. This release does not install a loader.
 2. Extract the remaining ZIP files into their own folder. Keep `tools`, `sheets` and the PowerShell scripts together.
-3. Open your Xbox Forza copy. Its window must be visible, non-minimized and titled `Forza Horizon 6`. The creator reports that Drone Mode keeps the scenery source usable when switching to BFS; this has not been independently verified across versions.
+3. Open your Xbox Forza copy. Its window must be visible, non-minimized and titled `Forza Horizon 6`. Enter Drone Mode and position the camera behind your car facing down the road. Press **Backspace** in Forza to hide the Drone Mode UI. The creator reports that Drone Mode keeps the scenery source usable when switching to BFS; this is not guaranteed across game versions. Its camera and car remain independent of BFS.
 4. Run `Start-Bridge.ps1` from PowerShell. You can pass `-Python "path/to/python.exe" -FFmpeg "path/to/ffmpeg.exe"`. Capture runs hidden, continuously. It does not launch Forza, send driving input, inject code into Forza or modify its files.
-5. Start BFS and a solo song. **F8** toggles the backdrop. Version 0.1.1 retains the backdrop while the song is paused; menus without an active path follower use BFS's normal view.
+5. Start BFS and a solo song. **F8** toggles the backdrop. **F9** toggles clean presentation. Clean mode hides BFS scenery and its instanced grass, preserves block colors, native break effects, targets, traffic hazards and local ramp visuals, and suppresses BFS fog/post-processing over the video. The backdrop stays active during song pause. Menus without an active path follower use BFS's normal view.
 6. Run `Stop-Bridge.ps1` when finished. It stops the helper without closing either game. BFS restores the original camera settings and decorative renderers once frames become stale.
 
 Capture is 1280×720 at up to 30 FPS. To change dimensions, edit the transport sheet, run preflight and rebuild the receiver so both processes agree. The whole source image includes Forza's car, road and HUD; these are not separated automatically.
@@ -27,7 +27,7 @@ Capture is 1280×720 at up to 30 FPS. To change dimensions, edit the transport s
 
 Solo BFS only. Presentation turns off when BFS reports an active multiplayer client or server. No matchmaking is provided. Forza remains an independently running source; the bridge itself does not connect to its online services.
 
-BFS's camera clear settings change temporarily, and selected decorative renderer roots are hidden. BFS roads, lanes, scoring, inputs, vehicles and collisions are not rewritten. Camera/scenery plugins may conflict. The separate countryside project's files and imported cars are not included.
+BFS camera settings change temporarily. Clean mode hides its world/player renderers and disables its instanced grass component; targets and hazards remain visible. Original states restore on toggle-off, stale frames or multiplayer activation. Scoring, controls and collisions are not rewritten. Camera/scenery plugins may conflict. The separate countryside project's files and imported cars are not included.
 
 The bridge does not bypass anti-cheat, DRM, ownership or focus protection. It does not suppress Forza's focus notification. Use the game's available modes/settings to keep the source running.
 
@@ -38,7 +38,8 @@ The bridge does not bypass anti-cheat, DRM, ownership or focus protection. It do
 - **Source missing/minimized:** restore Forza. Do not run a second Forza instance. If window capture closes, restore the game and start the bridge again.
 - **FFmpeg filter missing:** check `ffmpeg -h filter=gfxcapture` and pass a compatible build.
 - **Header mismatch:** rebuild after changing dimensions. Do not run two bridge folders at once; the launcher prevents duplicate processes from the same folder.
-- **Colors/perspective do not match:** the image has its own camera and tonemapping. HDR, lighting, depth and perspective matching are unfinished.
+- **Colors/perspective do not match:** F9 enables/disables clean mode. Clean mode keeps gameplay exposure, bloom and tonemapping for colored targets; materials are left unchanged. The image has its own camera; depth, road perspective and lane matching remain unfinished.
+- **Forza HUD or focus notification appears:** it is part of the captured window. Hide the Drone Mode UI with Backspace in Forza. The bridge cannot remove a source focus warning or resume a paused Forza simulation.
 
 ## Remove
 
@@ -59,7 +60,7 @@ JSON sheets are the source of truth. Preflight checks their design cells and gen
 
 The repaired 0.1.0 receiver applied 1,966 frames with zero bridge errors in observed runtime status. Capture ran at about 29–30 FPS. Timestamp samples were roughly 9–62 ms old: **transport freshness, not end-to-end display latency**. When the timed test source stopped, status showed the original view restored with zero modified cameras/renderers.
 
-Version 0.1.1 builds without warnings or errors. Its pause-retention change has not yet been retested in a fresh BFS process. Complete visual composition/alignment, sustained performance, recording compatibility and multiplayer behavior have not been fully verified. The release is **prerelease**. It is not claimed to be a finished photorealistic fusion.
+Version 0.2.3 built without warnings/errors. Observed gameplay status reported zero bridge errors, one disabled instanced grass system and hundreds of preserved target/effect renderers. Inspected gameplay captures showed colored targets and break fragments, with no BFS grass or dark lower-screen cover. An off/on check on 0.2.2 restored camera, renderer and grass states; 0.2.3 removes that local build's failed material adjustment. Complete alignment, sustained performance, long recordings and multiplayer behavior have not been fully verified. The release is **prerelease**. It is not claimed to be a finished photorealistic fusion.
 
 ## Credits and rights
 

@@ -14,8 +14,15 @@ internal static class BackdropRow {
  internal const int cameraDepth = -100;
  internal const bool autoEnable = true;
  internal const bool previewInMenu = false;
+ internal const bool cleanVideo = true;
  internal static readonly string[] hideRootNames = {"BUILDING","Japanese countryside template"};
  internal static readonly string[] hideRootPrefixes = {"Japanese countryside "};
+ internal static readonly string[] preserveComponentNames = {"CubeTriggerEvent","CubeExplodeEffectCaller","ProximityPathVehicleMover","ChildObjectExplosion"};
+ internal static readonly string[] preserveRootNames = {"CubeExplosionEffectPool","Beats","Obstacles","Stings","Traffic"};
+ internal static readonly string[] preserveRootPrefixes = {"BFS_Ramp_Beat","board fragture effect","HitExplode"};
+ internal static readonly string[] preserveRootPatterns = {"_Beat[0-9.]+_Key[0-9]+$"};
+ internal static readonly string[] disabledFrameSettings = {"AtmosphericScattering","Volumetrics","VolumetricClouds","CustomPostProcess","CustomPass","Distortion","MotionVectors","ObjectMotionVectors","MotionBlur","DepthOfField","ColorGrading","Vignette","ChromaticAberration","LensDistortion","FilmGrain"};
+ internal static readonly string[] gameplayFrameSettings = {"Postprocess","ExposureControl","Tonemapping","Bloom"};
 }
 internal record HookRow(string Id, string Target, string Method, bool WritesGame);
 internal static class HookRows { internal static readonly HookRow[] All = {
