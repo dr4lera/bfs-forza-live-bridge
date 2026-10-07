@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.4 — 2026-10-07
+
+- Regular installation release with a full bridge ZIP and a plugin-only ZIP.
+- BepInEx 6 Unity IL2CPP x64 is required; manual plugin installation is documented.
+- Optional Windows installer finds Steam libraries, verifies the receiver, backs up an older bridge and offers the pinned official loader download for fresh installations.
+- Installer tests passed for fresh installation, upgrades/backups, invalid-folder rejection and checksum rejection in disposable fixtures.
+- Includes the unchanged, live-tested gameplay receiver 0.2.3.
+
 ## 0.2.3 — 2026-10-07
 
 - Remove the 0.2.2 material adjustment that made targets too dark.

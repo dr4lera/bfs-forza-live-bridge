@@ -1,0 +1,25 @@
+BFS.ForzaLive receiver 0.2.3 - plugin-only package
+
+Requires Windows x64 and BepInEx 6 Unity IL2CPP x64.
+Tested loader: 6.0.0-be.788. Tested game: Beat For Speed Demo 0.7.33.
+Official loader instructions:
+https://docs.bepinex.dev/master/articles/user_guide/installation/unity_il2cpp.html
+
+1. Close the BFS copy you want to modify.
+2. Install the compatible BepInEx loader in that game's root if needed.
+3. Back up an existing BFS.ForzaLive.dll, then copy the included
+   BepInEx/plugins/BFS.ForzaLive.dll into that copy's BepInEx/plugins folder.
+4. Keep the capture helper running on the same PC while playing a solo song.
+   F8 toggles the bridge. F9 toggles clean presentation.
+
+FIRST-TIME SETUP: also download/extract the full bridge ZIP from:
+https://github.com/dr4lera/bfs-forza-live-bridge/releases/tag/v0.2.4
+It contains the tools/sheets and Start-Bridge.ps1 / Stop-Bridge.ps1 helpers.
+The helper needs Python 3 and a gfxcapture-capable FFmpeg. Start-Bridge can
+download FFmpeg. Keep your Forza Xbox copy visible in Drone Mode; use
+Backspace in Forza to hide its UI. Then run Start-Bridge.ps1 and launch BFS.
+
+Other BFS versions have not been validated and may require a rebuild.
+The separate countryside mod and other BFS plugins are not requirements.
+The Forza car/camera/road are not synchronized with BFS, and source focus
+notifications are not suppressed. See the full README for limitations.

@@ -1,0 +1,39 @@
+BFS x Forza Live Bridge - Windows installer package 0.2.4
+Includes the gameplay receiver 0.2.3 tested in BFS Demo 0.7.33.
+
+1. Download BFS-Forza-Live-Bridge-0.2.4.zip from GitHub Releases.
+   Extract the WHOLE ZIP into a permanent folder. Do not run from inside the ZIP.
+2. Close Beat For Speed Demo. Double-click Install-Bridge.exe.
+   It finds the Steam installation or asks for its folder.
+   It checks the receiver checksum and backs up an existing bridge DLL.
+   If no loader is installed, it offers the official BepInEx 6 IL2CPP x64
+   build 788 download. Other mods and existing loader files are not replaced.
+3. Install Python 3 if needed: https://www.python.org/downloads/windows/
+   Enable the installer's PATH option. No Python packages are required.
+4. Open your own Forza Horizon 6 Xbox copy, enter Drone Mode and position
+   the camera behind the car facing down the road. Backspace hides its UI.
+   Keep Forza visible and non-minimized.
+5. In PowerShell, run Start-Bridge.ps1 from this extracted folder.
+   It finds FFmpeg or downloads it from the BtbN build project.
+6. Open BFS and start a solo song. F8 toggles the bridge; F9 toggles clean mode.
+   Capture has no time limit. Run Stop-Bridge.ps1 when finished.
+
+Custom Steam location:
+  Install-Bridge.exe --game "D:\SteamLibrary\steamapps\common\Beat For Speed Demo"
+Check without changing files:
+  Install-Bridge.exe --check
+
+Requires Windows 10/11, both games, Python 3 and a gfxcapture-capable FFmpeg.
+The installer EXE uses the Windows .NET Framework; no .NET SDK is needed.
+First BepInEx launch may take longer while it generates interop data.
+If Windows or your organization's policy blocks a file/script, use its normal
+approved installation process. The installer does not change security policies.
+
+To remove: stop capture, close BFS, and remove only BFS.ForzaLive.dll and its
+ForzaLiveData folder from BepInEx/plugins. Restore a previous bridge DLL from
+this folder's backups if needed. A freshly installed BepInEx loader is separate;
+follow its official removal instructions if you want to remove that too.
+
+This is an experimental flat video bridge. The Forza car, camera and road are
+not synchronized with BFS. Source focus notifications are not suppressed.
+See README.md for limitations, diagnostics, compatibility and credits.
